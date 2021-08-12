@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ construction_site.name }} {% endblock %}
+
+{% block body %}
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Chantier: {{ construction_site.name }} </h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <a href="{{ path('construction_site_index') }}" class="btn btn-sm btn-outline-secondary">Tous les chantiers</a>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label><strong>Nom:</strong> </label> {{ construction_site.name }}
+                            </div>
+
+                            <div class="form-group">
+                                <label><strong>Adresse:</strong> </label> {{ construction_site.address }} - {{ construction_site.postalCode }} {{ construction_site.city }}
+                            </div>
+
+                            <div class="form-group">
+                        <label><strong>Date de démarrage:</strong> </label> {{ construction_site.startDate | date('d/m/Y') }}
+                    </div>
+                        </div>
+                        <div class="col-6">
+                            {% include 'construction_site/userChecked.html.twig' %}
+                        </div>
+                    </div>
+
+                    <br>
+                    <a href="{{ path('construction_site_edit', {'id': construction_site.id}) }}" class="btn btn-sm btn-outline-success">Editer</a>
+                    <button
+                            class="btn btn-sm btn-outline-danger delete-btn-action"
+                            data-url="{{ path('construction_site_delete', {'id': construction_site.id}) }}"
+                            data-token="{{  csrf_token('delete' ~ construction_site.id) }}"
+                            data-text="{{ "Voulez vous supprimer le chantier : " ~ construction_site.name ~  ' ?'}}"
+
+                    >Supprimer</button>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('entity-delete-action') }}
+
+{% endblock %}
+

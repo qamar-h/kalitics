@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les pointages{% endblock %}
+
+{% block body %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Tous les pointages</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <a href="{{ path('check_in_new') }}" class="btn btn-sm btn-outline-secondary">Nouveau pointage</a>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+
+        {% include 'partials/_notification.html.twig' %}
+
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Utilisateur</th>
+                            <th>Chantier</th>
+                            <th>Date</th>
+                            <th>Durée</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for check_in in check_ins %}
+                        <tr>
+                            <td>{{ check_in.id }}</td>
+                            <td>{{ check_in.user.firstname }} {{ check_in.user.lastname }}</td>
+                            <td>{{ check_in.constructionSite.name }}</td>
+                            <td>{{ check_in.dateOfCheckIn ? check_in.dateOfCheckIn|date('d/m/Y') : '' }}</td>
+                            <td>{{ durationService.getHoursAndMinutesToString(check_in.duration,'%02d heure(s) %02d minute(s)') }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-outline-primary" href="{{ path('check_in_show', {'id': check_in.id}) }}">Voir</a>
+                                <a class="btn btn-sm btn-outline-success" href="{{ path('check_in_edit', {'id': check_in.id}) }}">Editer</a>
+                                <button
+                                        class="btn btn-sm btn-outline-danger delete-btn-action"
+                                        data-url="{{ path('check_in_delete', {'id': check_in.id}) }}"
+                                        data-token="{{  csrf_token('delete' ~ check_in.id) }}"
+                                        data-text="{{ "Voulez vous supprimer le pointage N° : " ~ check_in.id ~  "?" }}"
+                                >Supprimer</button>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">Aucun pointage.</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('entity-delete-action') }}
+
+{% endblock %}

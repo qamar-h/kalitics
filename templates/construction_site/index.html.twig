@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les chantiers{% endblock %}
+
+{% block body %}
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Tous les chantiers</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <a href="{{ path('construction_site_new') }}" class="btn btn-sm btn-outline-secondary">Nouveau chantier</a>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+
+        {% include 'partials/_notification.html.twig' %}
+
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Date de démarrage</th>
+                <th>Date de création</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for construction_site in construction_sites %}
+            <tr>
+                <td>{{ construction_site.id }}</td>
+                <td>{{ construction_site.name }}</td>
+                <td>{{ construction_site.address }} - {{ construction_site.postalCode }} {{ construction_site.city }}</td>
+                <td>{{ construction_site.startDate ? construction_site.startDate|date('d/m/Y') : '' }}</td>
+                <td>{{ construction_site.createdAt ? construction_site.createdAt|date('d/m/Y') : '' }}</td>
+                <td>
+                    <a class="btn btn-sm btn-outline-primary" href="{{ path('construction_site_show', {'id': construction_site.id}) }}">Voir</a>
+                    <a class="btn btn-sm btn-outline-success" href="{{ path('construction_site_edit', {'id': construction_site.id}) }}">Editer</a>
+                    <button
+                            class="btn btn-sm btn-outline-danger delete-btn-action"
+                            data-url="{{ path('construction_site_delete', {'id': construction_site.id}) }}"
+                            data-token="{{  csrf_token('delete' ~ construction_site.id) }}"
+                            data-text="{{ "Voulez vous supprimer le chantier : " ~ construction_site.name ~ ' ?'}}"
+                    >Supprimer</button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucun chantier</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('entity-delete-action') }}
+
+{% endblock %}

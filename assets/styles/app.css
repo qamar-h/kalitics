@@ -1,0 +1,48 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "./dashboard.css";
+
+body {
+    background-color: lightgray;
+}
+
+
+.home-btn-card {
+    float:right;
+}
+
+
+#modalOfDelete .modal-content {
+    background-color: #bb0505;
+}
+
+#modalOfDelete .modal-body {
+    color:white;
+    font-weight: bold;
+}
+
+
+#modalOfDelete .modal-header {
+    color:white;
+    border-bottom: 1px solid #b93737;
+}
+
+#modalOfDelete .modal-footer {
+    border-top: none;
+}
+
+#live-errors{
+    display: none;
+}
+
+.form-error {
+    color:red;
+}
+
+.form-error ul {
+    list-style: none;
+    padding: 0;
+}
+
+.form-group{
+    margin-bottom:20px;
+}

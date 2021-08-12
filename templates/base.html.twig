@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Une application de test">
+    <meta name="author" content="Qamar HAYAT">
+
+    <title>{% block title %}Accueil{% endblock %} - Kalitics app</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+
+</head>
+<body>
+
+{% include 'partials/_header.html.twig' %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        {% include 'partials/_navbar.html.twig' %}
+
+        {% block body %}{% endblock %}
+
+    </div>
+</div>
+
+{% include 'partials/modalOfDelete.html.twig' %}
+
+</body>
+</html>

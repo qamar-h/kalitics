@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pointage N°{{ check_in.id }}{% endblock %}
+
+{% block body %}
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Pointage N°: {{ check_in.id }}</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <a href="{{ path('check_in_index') }}" class="btn btn-sm btn-outline-secondary">Tous les pointages</a>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label><strong>Numéro:</strong> </label> {{ check_in.id }}
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Utilisateur:</strong> </label> {{ check_in.user.firstname }} {{ check_in.user.lastname }}
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Chantier:</strong> </label> {{ check_in.constructionSite.name }}
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Date du pointage:</strong> </label> {{ check_in.dateOfCheckIn | date('d/m/Y') }}
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Durée:</strong> </label> {{ check_in.duration  }} minute{{ check_in.duration > 1 ? 's':''}}
+                    </div>
+
+                    <br>
+                    <a href="{{ path('check_in_edit', {'id': check_in.id}) }}" class="btn btn-sm btn-outline-success">Editer</a>
+                    <button
+                            class="btn btn-sm btn-outline-danger delete-btn-action"
+                            data-url="{{ path('check_in_delete', {'id': check_in.id}) }}"
+                            data-token="{{  csrf_token('delete' ~ check_in.id) }}"
+                            data-text="{{ "Voulez vous supprimer le pointage N° : " ~ check_in.id ~ ' ?'}}"
+
+                    >Supprimer</button>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('entity-delete-action') }}
+
+{% endblock %}
+

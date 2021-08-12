@@ -50,3 +50,18 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+
+/node_modules
+node_modules/
+
+.env
+/.env
+
+.idea
+/.idea
+
+public/build
+/public/build
+
+.DS_Store
+/.DS_Store

@@ -1,0 +1,27 @@
+<h4>Les utilisateurs qui ont pointés</h4>
+<table class="table table-striped table-sm">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Matricule</th>
+        <th>Durée</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user_checked in users_checked %}
+        <tr>
+            <td><a href="{{ path('user_show', {"id" : user_checked['id'] }) }}"> {{ user_checked['id'] }}</a></td>
+            <td>{{ user_checked['lastname'] }}</td>
+            <td>{{ user_checked['firstname'] }}</td>
+            <td>{{ user_checked['registrationNumber'] }}</td>
+            <td>{{ durationService.getHoursAndMinutesToString(user_checked['duration'],'%02d heure(s) %02d minute(s)') }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">Aucun utilisateur</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

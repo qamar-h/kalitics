@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+    {% for f in form %}
+        {% if f.vars.name not in ['_token'] %}
+        <div class="form-group">
+            <label>{{ f.vars.label }}</label>
+            {{ form_widget(f) }}
+            {% if f.vars.errors | length > 0 %}
+                <div class="form-error">
+                    {{ form_errors(f) }}
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    {% endfor %}
+
+    <br>
+    <div class="alert alert-danger" id="live-errors">
+
+    </div>
+
+    <div class="form-group">
+        <br>
+        <button class="btn btn-sm btn-success">Sauvegarder</button>
+    </div>
+{{ form_end(form) }}

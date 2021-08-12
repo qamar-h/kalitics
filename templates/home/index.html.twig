@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil {% endblock %}
+
+{% block body %}
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Accueil</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4>{{ userCount }} Utilisateur{{ userCount > 1 ? 's': ''}}</h4>
+                    <a href="{{ path('user_new') }}" class="btn btn-sm btn-outline-secondary home-btn-card">Ajouter</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4>{{ constructionSiteCount }} Chantier{{ constructionSiteCount > 1 ? 's': ''}}</h4>
+                    <a href="{{ path('construction_site_new') }}" class="btn btn-sm btn-outline-secondary home-btn-card">Ajouter</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4>{{ checkInCount }} Pointage{{ checkInCount > 1 ? 's': ''}}</h4>
+                    <a href="{{ path('check_in_new') }}" class="btn btn-sm btn-outline-secondary home-btn-card">Pointer un utilisateur</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}

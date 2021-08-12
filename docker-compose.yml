@@ -1,0 +1,23 @@
+version: "3"
+services:
+
+  kalitics-test:
+    container_name:  kalitics-test
+    build: docker/php
+    ports:
+      - "8082:80"
+    volumes:
+      - "/Users/qamar/Desktop/KaliticsTest:/var/www/html"
+    depends_on:
+      - kalitics-db
+
+
+  kalitics-db:
+    container_name: kalitics-db
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: kalitics
+      MYSQL_ROOT_PASSWORD: db_password
+    volumes:
+      - "/var/www/kalitics-db:/var/lib/mysql"
