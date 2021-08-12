@@ -7,7 +7,7 @@ services:
     ports:
       - "8082:80"
     volumes:
-      - "/Users/qamar/Desktop/KaliticsTest:/var/www/html"
+      - "/the/path/of/project:/var/www/html"
     depends_on:
       - kalitics-db
 
@@ -20,4 +20,4 @@ services:
       MYSQL_DATABASE: kalitics
       MYSQL_ROOT_PASSWORD: db_password
     volumes:
-      - "/var/www/kalitics-db:/var/lib/mysql"
+      - "/the/path/of/db/directory:/var/lib/mysql"
