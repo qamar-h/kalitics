@@ -43,32 +43,32 @@ replace "/the/path/of/db/directory"
 
 ### 4 - Run the containers
 ```bash
-docker-compose up -d
+make run
 ```
 
 ### 5 - Install php dependencies
 ```bash
-docker exec -i kalitics-test composer install
+make composer
 ```
 
 ### 6 - Install JS dependencies
 ```bash
-docker exec -i kalitics-test npm install
+make npm
 ```
 
 ### 7 - build assets
 ```bash
-docker exec -i kalitics-test npm run dev
+make asset
 ```
 
 ### 8 - Migrate the database
 ```bash
-docker exec -i kalitics-test php bin/console doctrine:migration:migrate --no-interaction
+make db-migrate
 ```
 
 ### 9 - load demo data
 ```bash
-docker exec -i kalitics-test php bin/console doctrine:fixtures:load --no-interaction
+make db-load-data
 ```
 
 ### 10 - End - Go to: 
