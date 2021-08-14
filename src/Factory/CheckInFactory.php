@@ -18,7 +18,7 @@ class CheckInFactory
         $this->userRepository = $userRepository;
     }
 
-    public function fromArray(array $data): CheckIn
+    public function createFromArray(array $data): CheckIn
     {
         $checkIn = new CheckIn;
 

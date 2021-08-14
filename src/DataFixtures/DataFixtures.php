@@ -29,7 +29,9 @@ class DataFixtures extends Fixture
                 ->setCreatedAt(new \DateTimeImmutable);
 
             $checkIn = (new CheckIn)
-                ->setDateOfCheckIn((new \DateTime())->modify('+' .$i. ' days'))
+                ->setDateOfCheckIn((new \DateTime(date('Y-m-d') . ' 00:00:00'))
+                    ->modify('+' .$i. ' days')
+                )
                 ->setDuration(60 * $i)
                 ->setUser($user)
                 ->setConstructionSite($constructionSite)

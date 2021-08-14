@@ -36,7 +36,7 @@ class CheckInValidatorController extends AbstractController
             return new JsonResponse(['message' => 'Token invalide.'], Response::HTTP_FORBIDDEN);
         }
 
-        $checkIn = $checkInFactory->fromArray($content);
+        $checkIn = $checkInFactory->createFromArray($content);
         $errors = $validator->validate($checkIn);
 
         foreach ($errors as $error) {
